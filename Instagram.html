@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moyoo — Instagram-style Demo</title>
+  <link rel="stylesheet" href="Instagram.css">
+</head>
+<body>
+  <main class="ig">
+    <header class="ig-header">
+      <h1>Moyoo</h1>
+      <nav aria-label="profile actions">
+        <button class="pill">Follow</button>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="main">
+
+        <section class="profile-hero" aria-label="profile">
+          <img class="hero-bg" src="pic/IG-hero.jpg" alt="">
+          <div class="hero-inner">
+            <img class="avatar" src="pic/avatar.jpg" alt="Moyoo avatar">
+            <div class="hero-info">
+              <h2>Moyoo</h2>
+              <p class="bio">Curating small creative moments • Lagos based</p>
+              <div class="counts"><span class="pill">1.2k followers</span> <span class="pill">180 posts</span></div>
+            </div>
+            <div class="hero-actions"><button class="pill">Follow</button></div>
+          </div>
+        </section>
+
+        <div class="story-strip" aria-label="stories">
+          <div class="story"><img src="pic/2.png" alt="Artist"><span>Artist</span></div>
+          <div class="story"><img src="pic/1.png" alt="Design"><span>Design</span></div>
+          <div class="story"><img src="pic/3.jpg" alt="Travel"><span>Travel</span></div>
+          <div class="story"><img src="pic/4.png" alt="Food"><span>Food</span></div>
+        </div>
+
+        <section class="ig-feed">
+      <!-- image card -->
+      <article class="ig-card">
+        <div class="media">
+          <img src="pic/IMG_E6627.JPG" alt="Abstract art">
+        </div>
+        <div class="meta">
+          <div class="left">
+            <strong>Artist</strong>
+            <span class="caption">A quick study of colors and motion.</span>
+          </div>
+          <div class="actions">
+            <button aria-label="Like"><img src="icons/heart.svg" alt=""></button>
+            <button aria-label="Comment"><img src="icons/comment.svg" alt=""></button>
+            <button aria-label="Save"><img src="icons/bookmark.svg" alt=""></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- video card -->
+      <article class="ig-card">
+        <div class="media">
+          <video class="thumb" muted autoplay loop playsinline poster="pic/ig2.jpg" aria-hidden="true" role="presentation">
+            <source src="pic/EHLP0517.MP4" type="video/mp4">
+          </video>
+          <div class="play"><img src="icons/play.svg" alt=""></div>
+        </div>
+        <div class="meta">
+          <div class="left">
+            <strong>MotionLab</strong>
+            <span class="caption">Short loop — color transitions.</span>
+          </div>
+          <div class="actions">
+            <button aria-label="Like"><img src="icons/heart.svg" alt=""></button>
+            <button aria-label="Comment"><img src="icons/comment.svg" alt=""></button>
+            <button aria-label="Save"><img src="icons/bookmark.svg" alt=""></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- mixed card -->
+      <article class="ig-card">
+        <div class="media">
+          <img src="pic/DJI_0201.JPG" alt="Street photography">
+        </div>
+        <div class="meta">
+          <div class="left">
+            <strong>Street</strong>
+            <span class="caption">From the latest Lagos walkabout.</span>
+          </div>
+          <div class="actions">
+            <button aria-label="Like"><img src="icons/heart.svg" alt=""></button>
+            <button aria-label="Comment"><img src="icons/comment.svg" alt=""></button>
+            <button aria-label="Share"><img src="icons/share.svg" alt=""></button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </div>
+
+  <aside class="sidebar">
+    <div class="suggestions">
+      <h4>Suggested</h4>
+      <div class="suggestion">
+        <img src="pic/st2.jpg" alt="">
+        <div>
+          <strong>DesignDaily</strong>
+          <div class="muted">Creative tips</div>
+        </div>
+        <button class="pill">Follow</button>
+      </div>
+      <div class="suggestion">
+        <img src="pic/st3.jpg" alt="">
+        <div>
+          <strong>TravelLens</strong>
+          <div class="muted">Street scenes</div>
+        </div>
+        <button class="pill">Follow</button>
+      </div>
+      <div class="suggestion">
+        <img src="pic/st4.jpg" alt="">
+        <div>
+          <strong>Foodie</strong>
+          <div class="muted">Tasty shots</div>
+        </div>
+        <button class="pill">Follow</button>
+      </div>
+    </div>
+
+    <div class="about card">
+      <h4>About Moyoo</h4>
+      <p class="muted">A small creative portfolio with photos, short loops and daily finds.</p>
+    </div>
+
+    <div class="trending card">
+      <h4>Trending</h4>
+      <div class="trend"><img src="pic/ig1.jpg" alt=""><span>#colorstudy</span></div>
+      <div class="trend"><img src="pic/ig3.jpg" alt=""><span>#streetlife</span></div>
+      <div class="trend"><img src="pic/ig2.jpg" alt=""><span>#shortloops</span></div>
+    </div>
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <small class="muted">© 2025 Moyoo</small>
+    <nav class="footer-links">
+      <a href="#" class="muted">Privacy</a>
+      <a href="#" class="muted">Terms</a>
+    </nav>
+  </div>
+</footer>

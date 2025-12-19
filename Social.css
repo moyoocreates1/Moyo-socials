@@ -1,0 +1,180 @@
+*,*::before,*::after{box-sizing:border-box}
+body{
+    background: linear-gradient(180deg,#071026,#0f1117 60%);
+    padding: 2rem 0 4rem;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+    color: #fff;
+}
+.container{width: min(1100px, 96vw); margin: 0 auto; padding: 0 1rem}
+.page-header{display:flex;align-items:center;justify-content:space-between;margin:1.2rem 0}
+.page-header h1{margin:0;font-size:1.6rem;letter-spacing:-0.3px}
+.page-header .sub{color:rgba(255,255,255,0.75);font-size:0.95rem;margin-top:6px}
+.page-actions .pill{background:rgba(255,255,255,0.06);padding:8px 12px;border-radius:999px;color:#fff;text-decoration:none}
+
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+}
+.card{
+    display: block;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    color:#fff;
+    text-decoration: none;
+    padding: 1.4rem;
+    margin-bottom: 0;
+    border-radius: 14px;
+    min-height: 160px;
+    font-size: 1.05rem;
+    transition: transform 0.28s cubic-bezier(.2,.9,.2,1), box-shadow 0.28s ease;
+}
+/*Different sizes for cards*/
+.card.tall{
+    min-height: 260px;
+}
+.card.wide{
+    min-height: 200px;
+    position: relative;
+    overflow: hidden;
+    /* fallback poster if video isn't available */
+    background-size: cover;
+    background-position: center;
+}
+
+/* video that fills the card */
+.card.wide .card-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* content above the video */
+.card.wide .card-content {
+    position: relative;
+    z-index: 1;
+    color: white;
+}
+
+/* subtle overlay for legibility */
+.card.wide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Hover lift*/
+.card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 24px 50px rgba(3,8,18,0.6);
+}
+.card:focus{outline:2px solid rgba(255,107,107,0.14);outline-offset:3px}
+
+/* Entrance animation (staggered) */
+.grid .card{ animation: cardEnter 420ms cubic-bezier(.2,.9,.2,1) forwards; }
+.grid .card:nth-child(1){ animation-delay: 60ms }
+.grid .card:nth-child(2){ animation-delay: 120ms }
+.grid .card:nth-child(3){ animation-delay: 180ms }
+.grid .card:nth-child(4){ animation-delay: 240ms }
+.grid .card:nth-child(5){ animation-delay: 300ms }
+.grid .card:nth-child(6){ animation-delay: 360ms }
+
+@keyframes cardEnter{
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* interactive press feedback */
+.card:active{ transform: translateY(-2px) scale(0.998); transition: transform 0.12s; }
+
+/* overlay body for titles/descriptions */
+.card-body{ position:absolute; left:16px; right:16px; bottom:16px; z-index:2; color:#fff; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.45)); padding:8px 12px; border-radius:10px; display:flex;flex-direction:column; gap:4px }
+.card-body h3{ margin:0; font-size:1.05rem; font-weight:700 }
+.card-body .muted{ margin:0; font-size:0.85rem; color: rgba(255,255,255,0.78) }
+.card.wide .card-body{ bottom:20px }
+
+/* Mobile polish */
+@media (max-width: 600px){
+  .container{ padding: 0 12px }
+  .grid{ gap: 0.85rem; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) }
+  .card{ min-height: 140px; border-radius:10px; padding:1rem }
+  .card .card-content{ display:none }
+  .card .card-logo{ right:8px; top:8px }
+  .card-body{ left:12px; right:12px; bottom:12px; padding:6px 8px; border-radius:8px }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .grid .card{ animation: none; opacity:1; transform:none }
+}
+
+
+/* distinct images for specific cards */
+.card .card-logo{position:absolute;right:12px;top:12px;z-index:3}
+.card .card-logo img{width:26px;height:26px;display:block;filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45))}
+
+.card.twitter{
+    background: linear-gradient(135deg, rgba(29,161,242,.18), rgba(12,125,199,.06));
+    position: relative;
+    color: #fff;
+}
+.card.linkedin{
+    background: linear-gradient(135deg, rgba(0,119,181,.18), rgba(0,91,142,.06));
+    position: relative;
+    color: #fff;
+}
+.card.github,
+.card.tall.github{
+    background-image: linear-gradient(rgba(10,10,10,0.55), rgba(10,10,10,0.25)), url('pic/github.webp');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+.card.pinterest,
+.card.tall.pinterest{
+    background-image: linear-gradient(rgba(80,20,20,0.45), rgba(80,20,20,0.25)), url('pic/pinterest.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+/* subtle content pill for readability */
+.card .card-content{
+    display: inline-block;
+    background: linear-gradient(180deg, rgba(0,0,0,0.42), rgba(0,0,0,0.25));
+    padding: 0.45rem 0.75rem;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+    z-index:2; position:relative;
+}
+
+.card.tall{
+    background-image:url(pic/IMG_E6598.JPG) ;
+    background-size:cover;
+}
+
+/* retain default card background */
+.card{
+    background-image: url(pic/IMG_E6595.JPG);
+    background-size: cover;
+    background-position:center;
+}
+
+/* accessibility: disable autoplaying video for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card .card-video { display: none; }
+}
+
+/* hide video on small screens to save bandwidth */
+@media (max-width: 600px) {
+  .card .card-video { display: none; }
+}

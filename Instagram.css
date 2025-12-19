@@ -1,0 +1,152 @@
+/*
+	Instagram-inspired, but more flexible stylesheet
+	- Modular components: header, story-strip, flexible feed, cards
+	- Uses CSS variables for easy theming
+	- Responsive and accessible (reduced-motion, focus styles)
+
+	Example usage (minimal HTML):
+	<section class="ig">
+		<div class="ig-header">Moyoo</div>
+		<div class="story-strip">
+			<div class="story"> <img src="pic/st1.jpg"><span>Artist</span></div>
+			...
+		</div>
+
+		<div class="ig-feed">
+			<article class="ig-card">
+				<div class="media"><img src="pic/post1.jpg"></div>
+				<div class="meta"> ... buttons, caption ...</div>
+			</article>
+		</div>
+	</section>
+*/
+
+:root{
+  --bg: #071226; /* page background (slightly deeper) */
+  --card: linear-gradient(180deg,#0f1720 0%, #071018 100%);
+  --muted: rgba(255,255,255,0.86);
+  --accent: #ff6b6b; /* warmer coral accent */
+  --glass: rgba(255,255,255,0.035);
+  --radius: 12px;
+  --gap: 18px;
+  --story-border: rgba(255,255,255,0.06);
+}
+
+/* Page layout */
+*,*::before,*::after{box-sizing: border-box}
+html,body{height:100%;}
+body{
+	margin:0;
+	font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	background: var(--bg);
+	color: #fff;
+	-webkit-font-smoothing:antialiased;
+	position: relative;
+	overflow-x: hidden; /* prevent horizontal scroll */
+}
+
+/* decorative subtle lights */
+body::before{ content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; background-image: radial-gradient(circle at 10% 10%, rgba(255,127,127,0.03), transparent 12%), radial-gradient(circle at 90% 80%, rgba(0,125,255,0.02), transparent 18%); }
+
+.ig{width: min(1200px, 96vw); margin:28px auto; padding: clamp(12px, 3vw, 20px); background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border-radius: clamp(8px, 1.2vw, 14px); box-shadow: 0 20px 70px rgba(2,8,14,0.6); position:relative; z-index:1; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);}  
+
+/* Layout: main + sidebar */
+.layout{display:grid;grid-template-columns: 1fr 320px;gap:28px;align-items:start}
+@media (max-width: 980px){ .layout{grid-template-columns:1fr} .sidebar{order:2} .main{order:1} }
+
+/* Profile hero */
+.profile-hero{position:relative;border-radius:12px;overflow:hidden;margin-bottom:18px;background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));}
+.profile-hero .hero-bg{width:100%;height:120px;object-fit:cover;display:block;filter: saturate(0.95) contrast(0.95) brightness(0.95)}
+.profile-hero .hero-inner{display:flex;align-items:center;gap:12px;padding:12px;position:relative;margin-top:-36px}
+.avatar{width:72px;height:72px;border-radius:50%;border:4px solid rgba(0,0,0,0.6);box-shadow:0 6px 18px rgba(0,0,0,0.6);object-fit:cover;background:#111}
+.hero-info h2{margin:0;font-size:18px}
+.bio{color:rgba(255,255,255,0.86);margin-top:6px;font-size:13px}
+.hero-actions{margin-left:auto}
+.counts .pill{margin-right:6px;background:rgba(0,0,0,0.45)}
+
+/* Sidebar */
+.sidebar{background:transparent;position:sticky;top:20px;align-self:start}
+.suggestions h4{margin:0 0 10px;font-size:14px;color:var(--muted)}
+.suggestion{display:flex;gap:10px;align-items:center;padding:8px;border-radius:10px;background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);margin-bottom:8px}
+.suggestion img{width:44px;height:44px;border-radius:8px;object-fit:cover}
+.muted{color:rgba(255,255,255,0.65);font-size:13px}
+.about.card{margin-top:12px;padding:12px;border-radius:10px;background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+.trending.card{margin-top:12px;padding:10px 12px;border-radius:10px;background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+.trend{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px}
+.trend img{width:48px;height:48px;border-radius:8px;object-fit:cover}
+.trend span{font-size:14px;color:var(--muted)}
+.site-footer{margin-top:26px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.03);color:rgba(255,255,255,0.6)}
+.footer-inner{max-width:1200px;margin:0 auto;padding:10px 18px;display:flex;justify-content:space-between;align-items:center}
+
+/* Header */
+.ig-header{
+	display:flex;align-items:center;justify-content:space-between;padding:10px 8px 18px;border-bottom:1px solid rgba(255,255,255,0.03);
+	margin-bottom:16px;
+}
+.ig-header h1{font-size:20px;margin:0;letter-spacing:-0.3px}
+
+/* Story-strip (horiz scroll, flexible) */
+.story-strip{
+	display:flex;gap:12px;padding:8px 0 18px;overflow:auto;scroll-snap-type:x proximity;  max-width:1200px; margin: 0 auto 18px; padding-left: 8px; padding-right: 8px;}
+.story{
+	min-width:92px;flex:0 0 auto;text-align:center;scroll-snap-align:center;cursor:pointer;
+}
+.story img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.04);box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+.story span{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+
+/* Feed: responsive grid for even distribution */
+.ig-feed{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  max-width: 100%;
+  margin: 0 auto;
+  align-items: start; /* keep cards top-aligned */
+}
+
+/* Fallback/spacing for very small screens */
+@media (max-width: 420px){ .ig-feed{ grid-template-columns: 1fr; gap: 12px } }
+
+/* Card */
+.ig-card{break-inside: avoid; background: var(--card); border-radius: var(--radius); padding:12px; margin-bottom:18px; box-shadow: 0 10px 30px rgba(2,6,9,0.5); transition: transform .22s ease, box-shadow .22s ease; overflow:hidden}
+.ig-card:hover{transform: translateY(-6px); box-shadow: 0 26px 60px rgba(3,9,16,0.66)}
+
+.ig-card .media{border-radius:10px; overflow:hidden; background:var(--glass); position:relative}
+.ig-card img, .ig-card video{width:100%; height:auto; display:block; object-fit:cover}
+
+/* subtle inner gradient to improve legibility */
+.ig-card .media::after{ content:''; position:absolute; inset:0; box-shadow: inset 0 -40px 60px rgba(0,0,0,0.18); pointer-events:none }
+
+.ig-card .meta{display:flex;align-items:center;justify-content:space-between;padding-top:10px}
+.meta .left{display:flex;gap:12px;align-items:center}
+.meta .actions{display:flex;gap:8px}
+.meta .actions button{background:transparent;border:0;color:var(--muted);padding:8px;border-radius:8px;cursor:pointer;transition: transform .16s ease, opacity .16s}
+.meta .actions button:hover{color:var(--accent);background:rgba(255,255,255,0.03);transform: translateY(-3px)}
+.meta .actions button:active{transform: translateY(0); opacity:0.95}
+.meta .actions img{width:18px;height:18px;display:block;filter:invert(1) brightness(2);opacity:0.98}
+
+.time{font-size:12px;color:rgba(255,255,255,0.55);margin-left:8px}
+
+.caption{color:var(--muted);font-size:14px;margin-top:8px}
+
+/* small pill for likes/view counts */
+.pill{display:inline-block;padding:6px 8px;background:rgba(0,0,0,0.35);border-radius:999px;font-size:13px;color:var(--muted)}
+
+/* subtle play overlay for videos */
+.media .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6));display:flex;align-items:center;justify-content:center;pointer-events:none}
+.media{position:relative}
+.media .play svg{width:22px;height:22px;fill:#fff;opacity:0.95}
+
+/* Accessibility and behavior */
+.ig-card:focus-within,.ig-card:focus{outline:2px solid rgba(239,71,111,0.18)}
+button:focus{outline:2px solid rgba(239,71,111,0.18)}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+	.ig-card, .ig-card:hover{ transform:none; transition:none }
+}
+
+/* Utility: small gap grid for tight layouts */
+.compact .ig-feed{ column-gap: 12px }
+
+/* End of Instagram-inspired stylesheet */
